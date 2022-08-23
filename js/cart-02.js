@@ -24,11 +24,13 @@ window.addEventListener('click', function(event){
 
     //Если товар есть в корзине
     if(itemInCart){
+     const counterElement = itemInCart.querySelector('[data-counter]');
+     counterElement.innerText = parseInt(counterElement.innerText) + parseInt(productInfo.counter);
+    } else {
+      //Если товара нет в корзине
 
-    }
-
-    //Собранные данные подставим в шаблон для товара в корзине
-    const cartItemHTML =`<div class="cart-item" data-id=""${productInfo.id}"">
+          //Собранные данные подставим в шаблон для товара в корзине
+    const cartItemHTML =`<div class="cart-item" data-id="${productInfo.id}">
     <div class="cart-item__top">
       <div class="cart-item__img">
         <img src="${productInfo.imgSrc}" alt="${productInfo.title}">
@@ -59,5 +61,10 @@ window.addEventListener('click', function(event){
 
   //Отобразим товар в корзине
   cartWrapper.insertAdjacentHTML('beforeend', cartItemHTML);
+    }
+
+    //Сбрасываем счетчик после добавления товара в корзину
+    card.querySelector('[data-counter]').innerText = '1';
+
   }
 })
